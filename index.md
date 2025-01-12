@@ -57,7 +57,7 @@ vif_values <- vif(model_full)
 Vif_values
 ```
 
-<img src="/housingPrices/assets/3a.png" alt="" width="500"/><br>
+<img src="/housingPrices/assets/3a.png" alt="" width="400"/><br>
 *Figure 3*
 
 Based on our VIF analysis in Figure 3, we can remove the following variables: rooms, heating, fuel, bathrooms, and bedrooms. Their values are greater than 1.49 and thus suggest moderate multicollinearity. The value for livingArea is also quite high, but this variable measures the number of rooms, bedrooms, and bathrooms in a house, so once we remove the prior variables, the VIF value should decrease. Referring to Figure 2, it is evident the beta coefficients for pctCollege, fireplaces, heating, fuel, and sewers all have p-values greater than =0.05, our chosen significance value. Thus to conclude our VIF analysis of the initial model, rooms, bedrooms, and bathrooms are removed from this model along with the insignificant variables.
@@ -147,7 +147,7 @@ Although the model’s adjusted R-squared has increased, suggesting that it bett
 confi <- confint(model_removed_outliers, level=0.95)
 ```
 
-<img src="/housingPrices/assets/10a.png" alt="" width="500"/><br>
+<img src="/housingPrices/assets/10a.png" alt="" width="400"/><br>
 *Figure 10*
 
 ```
@@ -165,7 +165,7 @@ summary(model_removed_outliers2)
 confi2 <- confint(model_removed_outliers2, level=0.95)
 ```
 
-<img src="/housingPrices/assets/12a.png" alt="" width="500"/><br>
+<img src="/housingPrices/assets/12a.png" alt="" width="400"/><br>
 *Figure 12*
 
 The final model in Figure 11 can explain 70.7% of the variance in the prices of houses in Saratoga Spring, New York in 2006. Furthermore, it is a statistically significant model due to its high F-statistic, its p-value being very nearly zero, and all of the variables being statistically significant. Compared to the initial full linear model, this final model is more capable of representing prices of houses in Saratoga Springs accurately and implementing the most significant variables. 
@@ -190,7 +190,7 @@ We also implement a Q-Q plot to visualize the points along the Q-Q line. Figure 
 qqnorm(residuals(model_removed_outliers2))
 qqline(residuals(model_removed_outliers2), col = "red")
 ```
-<img src="/housingPrices/assets/14a.png" alt="" width="500"/><br>
+<img src="/housingPrices/assets/14a.png" alt="" width="600"/><br>
 *Figure 14*
 
 In order to meet the assumptions for multiple regression analysis, the mean of the residuals must be equal to 0. By plotting the residuals of our final model (Figure 11) versus each independent variable, we evaluate the distribution of points in each scatterplot. A random scatter of points can be visualized in each scatterplot to verify the assumption. If the variable is a factor, a boxplot of the residuals of the model is created for each level of the factor. We check to see that the box plot is symmetric around 0 to make sure that the residuals have a mean of zero. The scatter plots and boxplots can be found in the appendix.
