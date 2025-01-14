@@ -1,5 +1,7 @@
 # A Statistical Analysis of Housing Prices in Saratoga Springs, NY
 
+By Yulin Zheng, Emma Lascu, Arjun Goswami
+
 ## I. Introduction
 
 Housing is a basic necessity, and a very expensive one in New York. As New York residents, we experience the consequences of the high cost of living firsthand. New York has its benefits and downsides to living in it, such as job opportunities and the standard of living, and we weigh these factors when deciding where to live. Many immigrants come to New York just for the opportunity at a better life, only to be met with cramped living and high prices. We will analyze a sample of housing data to better understand the cost of living in New York.
@@ -19,8 +21,8 @@ data <- mosaicData::SaratogaHouses
 head(data)
 ```
 
-<img src="/housingPrices/assets/1a.png" alt="" width="500"/><br>
-<img src="/housingPrices/assets/1b.png" alt="" width="500"/><br>
+<img src="/housingPrices/assets/1a.png" alt="" width="600"/><br>
+<img src="/housingPrices/assets/1b.png" alt="" width="600"/><br>
 *Figure 1*
 
 Since our data includes 6 qualitative variables, we must convert them to use in our model alongside the quantitative variables. We first build a full linear regression model using all 15 independent variables and the dependent variable (price). We will analyze the initial model to discern if interaction or quadratic terms are necessary, and to detect multicollinearity. Figure 2 is a summary of the coefficients’ values and p-values.
@@ -82,7 +84,7 @@ vif_values_reduced
 ```
 
 
-<img src="/housingPrices/assets/5a.png" alt="" width="500"/><br>
+<img src="/housingPrices/assets/5a.png" alt="" width="600"/><br>
 *Figure 5*
 
 However, the adjusted R-squared is 0.6371 in the summary output for the reduced model in Figure 4, which conveys that this model only accounts for 63.71% of the variance in the data. Thus we will introduce interaction terms to attempt to improve the model. After creating various models with different interaction terms, we found that the variables age and livingArea did interact and improved the model’s accuracy by 0.26%, as shown in Figure 6.
@@ -181,7 +183,7 @@ plot(fitted(model_removed_outliers2), residuals(model_removed_outliers2), main="
 abline(h=0, col="red")
 ```
 
-<img src="/housingPrices/assets/13a.png" alt="" width="500"/><br>
+<img src="/housingPrices/assets/13a.png" alt="" width="600"/><br>
 *Figure 13*
 
 We also implement a Q-Q plot to visualize the points along the Q-Q line. Figure 14 shows that the points on the Q-Q plot follow the Q-Q line, thus further verifying our normality assumption. There is slight deviation at the bottom and top of the line, however we can continue to assume normality due to the high amount of points on the line.
@@ -195,7 +197,7 @@ qqline(residuals(model_removed_outliers2), col = "red")
 
 In order to meet the assumptions for multiple regression analysis, the mean of the residuals must be equal to 0. By plotting the residuals of our final model (Figure 11) versus each independent variable, we evaluate the distribution of points in each scatterplot. A random scatter of points can be visualized in each scatterplot to verify the assumption. If the variable is a factor, a boxplot of the residuals of the model is created for each level of the factor. We check to see that the box plot is symmetric around 0 to make sure that the residuals have a mean of zero. The scatter plots and boxplots can be found in the appendix.
 
-Finally, we conduct an Analysis of Variance (ANOVA) test between the final model and the full model with no variables removed to understand the statistical difference between them. We will generate a report on the full model using the data with outliers removed so the ANOVA test is referencing the same dataset. The adjusted R-squared for the final model (Figure 11) is slightly greater than the full linear model (Figure 2) with no variables removed. However, the ANOVA table F-statistic is very small and the p-value is greater than the significance level =0.05, which suggests that the two models are not significantly different. 
+Finally, we conduct an Analysis of Variance (ANOVA) test between the final model and the full model with no variables removed to understand the statistical difference between them. We will generate a report on the full model using the data with outliers removed so the ANOVA test is referencing the same dataset. The adjusted R-squared for the final model (Figure 11) is slightly greater than the full linear model (Figure 2) with no variables removed. However, the ANOVA table F-statistic is very small (Figure 15) and the p-value is greater than the significance level =0.05, which suggests that the two models are not significantly different. 
 
 ```
 model_removed_outliers_full <- lm(price ~ lotSize + age + landValue + 
@@ -207,7 +209,7 @@ summary(model_removed_outliers_full)
 anova(model_removed_outliers2, model_removed_outliers_full)
 ```
 
-<img src="/housingPrices/assets/15a.png" alt="" width="500"/><br>
+<img src="/housingPrices/assets/15a.png" alt="" width="600"/><br>
 *Figure 15*
 
 Both the final combined and full linear models are capable of accurately representing the prices of houses in Saratoga Springs, however the final combined model has advantages to it outside of statistical reasoning.
